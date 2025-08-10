@@ -6,12 +6,12 @@ The admin portal is now protected by a two-layer security system with permanent 
 
 ### Layer 1: Security Token
 - **File**: `admin_access.php`
-- **Current Token**: `TF_SECURE_2025_ADM1N_G8T3WAY_K3Y`
+- **Current Token Placeholder**: `CHANGE_ME_SECURE_TOKEN`
 - **Purpose**: Prevents unauthorized discovery of admin login interface
 
 ### Layer 2: Permanent Admin Authentication
-- **Username**: `techforum_admin`
-- **Password**: `SecureAdmin@2025!`
+- **Username Placeholder**: `CHANGE_ME_ADMIN`
+- **Password Placeholder**: `CHANGE_ME_STRONG_PASSWORD`
 - **Role**: Superadmin with full permissions
 - **Storage**: Hardcoded in PHP constants (no database dependency)
 
@@ -29,8 +29,8 @@ The admin portal is now protected by a two-layer security system with permanent 
 2. Click "🔒 Admin Access" button → Goes to `admin_access.php`
 3. Enter security token: `TF_SECURE_2025_ADM1N_G8T3WAY_K3Y`
 4. Enter permanent admin credentials:
-   - **Username**: `techforum_admin`
-   - **Password**: `SecureAdmin@2025!`
+   - **Username**: `CHANGE_ME_ADMIN`
+   - **Password**: `CHANGE_ME_STRONG_PASSWORD`
 5. Access admin dashboard
 
 ## 📝 Configuration Instructions
@@ -39,15 +39,15 @@ The admin portal is now protected by a two-layer security system with permanent 
 1. Open `admin_access.php`
 2. Find lines: 
    ```php
-   define('ADMIN_USERNAME', 'techforum_admin');
-   define('ADMIN_PASSWORD', 'SecureAdmin@2025!');
+   define('ADMIN_USERNAME', 'CHANGE_ME_ADMIN');
+   define('ADMIN_PASSWORD', 'CHANGE_ME_STRONG_PASSWORD');
    ```
 3. Change the username and password to your preferred values
 4. Save and distribute new credentials to authorized admins only
 
 ### To Change Security Token:
 1. Open `admin_access.php`
-2. Find line: `define('ADMIN_ACCESS_TOKEN', 'TF_SECURE_2025_ADM1N_G8T3WAY_K3Y');`
+2. Find line: `define('ADMIN_ACCESS_TOKEN', 'CHANGE_ME_SECURE_TOKEN');`
 3. Change the token to your own secure value
 4. Save and distribute new token to authorized admins only
 
@@ -65,13 +65,13 @@ The admin portal is now protected by a two-layer security system with permanent 
 - **Admin Dashboard**: `admin_dashboard.php` (requires admin login)
 
 ### Default Credentials:
-- **Admin Username**: `techforum_admin`
-- **Admin Password**: `SecureAdmin@2025!`
-- **Security Token**: `TF_SECURE_2025_ADM1N_G8T3WAY_K3Y`
+- **Admin Username**: `CHANGE_ME_ADMIN`
+- **Admin Password**: `CHANGE_ME_STRONG_PASSWORD`
+- **Security Token**: `CHANGE_ME_SECURE_TOKEN`
 
 ## 🚨 Important Security Notes
 
-1. **Change both the security token AND admin credentials immediately** in production
+1. **Change the placeholder security token AND admin credentials immediately** after cloning
 2. **Use HTTPS** for all admin access in production
 3. **Regularly rotate** both the security token and admin password
 4. **Monitor logs** for failed access attempts

@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-// Security token - change this to something unique and secret
-define('ADMIN_ACCESS_TOKEN', 'TF_SECURE_2025_ADM1N_G8T3WAY_K3Y');
+// Security token - MUST be changed immediately after cloning (placeholder)
+define('ADMIN_ACCESS_TOKEN', 'CHANGE_ME_SECURE_TOKEN');
 
-// Permanent Admin Credentials - change these for production
-define('ADMIN_USERNAME', 'techforum_admin');
-define('ADMIN_PASSWORD', 'SecureAdmin@2025!');
+// Permanent Admin Credentials - MUST be changed (placeholders)
+define('ADMIN_USERNAME', 'CHANGE_ME_ADMIN');
+define('ADMIN_PASSWORD', 'CHANGE_ME_STRONG_PASSWORD');
 
 $error = '';
 $token_verified = false;
