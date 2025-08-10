@@ -1,0 +1,56 @@
+
+        /* Custom styles to match the theme of your style1.css */
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: #f5f7fa;
+        }
+                /* Background Image */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            filter: blur(1px);
+        }
+        .header-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .active-category-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .topic-avatar-gradient {
+             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tag-blue {
+            background-color: #f0f2ff;
+            color: #667eea;
+        }
+
+        /* Custom scrollbar for category choice bar on small screens */
+        .category-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .category-scrollbar::-webkit-scrollbar-track {
+            background: #e2e8f0; /* gray-200 */
+        }
+        .category-scrollbar::-webkit-scrollbar-thumb {
+            background: #a5b4fc; /* indigo-300 */
+            border-radius: 2px;
+        }
+        .category-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #818cf8; /* indigo-400 */
+        }

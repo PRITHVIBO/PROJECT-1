@@ -1,0 +1,387 @@
+/* Profile Page Styles - Medium Size */
+body {
+    background: url('../images/dsi.jpg') center/cover fixed, linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: block !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+body::before {
+    background: rgba(0, 0, 0, 0.4) !important;
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+}
+
+main {
+    width: 100% !important;
+    max-width: 850px;
+    margin: 2rem auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+    background: transparent !important;
+    flex: initial !important;
+}
+
+.profile-wrapper {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 11;
+    opacity: 1 !important;
+}
+
+.profile-wrapper h1 {
+    margin: 0 0 1.2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748 !important;
+    text-align: center;
+    opacity: 1 !important;
+}
+
+.profile-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 0 0 1.5rem;
+    justify-content: center;
+}
+
+.pill {
+    background: #e2e8f0 !important;
+    color: #2d3748 !important;
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    opacity: 1 !important;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h2 {
+    font-size: 1.3rem;
+    margin: 0 0 1rem;
+    color: #2d3748 !important;
+    font-weight: 600;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.4rem;
+    opacity: 1 !important;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: #2d3748 !important;
+    font-size: 0.95rem;
+    opacity: 1 !important;
+}
+
+.form-row input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 2px solid #cbd5e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: #ffffff !important;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    color: #2d3748 !important;
+    opacity: 1 !important;
+}
+
+.form-row input:focus {
+    outline: none;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+    background: #ffffff !important;
+}
+
+.readonly {
+    background: #f7fafc !important;
+    color: #4a5568 !important;
+    cursor: not-allowed;
+    border-color: #e2e8f0 !important;
+    opacity: 0.8 !important;
+}
+
+.note {
+    font-size: 0.8rem;
+    color: #718096 !important;
+    margin: 0.5rem 0 0;
+    line-height: 1.3;
+    opacity: 1 !important;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+button.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.9rem 1.8rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+button.primary:active {
+    transform: translateY(0);
+}
+
+button.primary:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.error-list {
+    background: #fed7d7;
+    color: #c53030;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    border: 1px solid #feb2b2;
+}
+
+.error-list strong {
+    color: #9b2c2c;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.error-list ul {
+    margin: 0.4rem 0 0 0.8rem;
+    padding: 0;
+}
+
+.success {
+    background: #c6f6d5;
+    color: #22543d;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    border: 1px solid #9ae6b4;
+}
+
+/* Form validation styles */
+.form-row input.valid {
+    border-color: #48bb78;
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+}
+
+.form-row input.invalid {
+    border-color: #f56565;
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+}
+
+.validation-message {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+}
+
+.validation-message.success {
+    background: #c6f6d5;
+    color: #22543d;
+}
+
+.validation-message.error {
+    background: #fed7d7;
+    color: #c53030;
+}
+
+/* Override global styles */
+.container {
+    position: static !important;
+    z-index: auto !important;
+}
+
+.profile-wrapper * {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Header Navigation Fixes */
+header {
+    position: relative !important;
+    z-index: 100 !important;
+    background: #667eea !important;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    margin: 0 0.9rem !important;
+    font-size: 0.9rem !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+.nav-link:hover {
+    text-decoration: underline !important;
+    color: #ffffff !important;
+}
+
+.tf-bar {
+    position: relative !important;
+    z-index: 101 !important;
+}
+
+#mainNav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    position: relative !important;
+    z-index: 102 !important;
+}
+
+#menuToggle {
+    z-index: 103 !important;
+    position: relative !important;
+}
+
+/* Mobile Navigation */
+@media (max-width: 760px) {
+    #menuToggle {
+        display: inline-block !important;
+    }
+    
+    #mainNav {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 100vh !important;
+        width: 230px !important;
+        background: #667eea !important;
+        padding: 1rem 1rem 2rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.25rem !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.25) !important;
+        z-index: 1000 !important;
+        border-top-right-radius: 12px !important;
+        border-bottom-right-radius: 12px !important;
+    }
+    
+    #mainNav.open {
+        transform: translateX(0) !important;
+    }
+    
+    .nav-link {
+        margin: 0.35rem 0 !important;
+        padding: 0.5rem 0.6rem !important;
+        width: 100% !important;
+        border-radius: 6px !important;
+    }
+    
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+        text-decoration: none !important;
+    }
+    
+    #navOverlay {
+        position: fixed !important;
+        inset: 0 !important;
+        background: rgba(0, 0, 0, 0.45) !important;
+        backdrop-filter: blur(2px) !important;
+        z-index: 999 !important;
+        opacity: 0 !important;
+        transition: opacity 0.3s !important;
+        display: block !important;
+        pointer-events: none !important;
+    }
+    
+    #navOverlay.show {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+    
+    body.nav-open {
+        overflow: hidden !important;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 0 15px;
+        margin: 1rem auto;
+    }
+    
+    .profile-wrapper {
+        padding: 2rem 1.5rem;
+    }
+    
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    button.primary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-wrapper {
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+    }
+    
+    .form-row input {
+        padding: 0.8rem;
+    }
+}

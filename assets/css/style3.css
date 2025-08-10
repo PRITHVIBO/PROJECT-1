@@ -1,0 +1,52 @@
+/* Custom styles to match the theme */
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #f5f7fa;
+}
+        /* Background Image */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            filter: blur(1px);
+        }
+
+.header-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.topic-avatar-gradient {
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.tag-blue {
+    background-color: #f0f2ff;
+    color: #667eea;
+}
+
+.reply-overlay {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Styles for smooth expansion */
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.expandable-content.expanded {
+    max-height: 1000px; /* Adjust as needed */
+}

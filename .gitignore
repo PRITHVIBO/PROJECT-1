@@ -1,0 +1,27 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# PHP / runtime caches
+vendor/
+composer.lock
+*.log
+logs/
+cache/
+session/
+
+# Environment & secrets (real files NOT committed)
+.env
+config/config.php
+config/db.php
+
+# IDE/editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Node (if later added)
+node_modules/
+
+# Misc/temporary
+archive_unused/
