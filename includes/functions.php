@@ -36,6 +36,10 @@ function set_flash($message) {
     $_SESSION['flash'] = $message;
 }
 
+function is_admin(): bool {
+    return !empty($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+}
+
 function format_date($date) {
     return date('M j, Y g:i A', strtotime($date));
 }
