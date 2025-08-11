@@ -1,12 +1,21 @@
 <?php
 session_start();
 
-// Security token (active). NOTE: Change this in production to a new secret value.
-define('ADMIN_ACCESS_TOKEN', 'TF_SECURE_2025_ADM_PORTAL_7f3e9a2cF1B8d4');
+// Optional external admin configuration (not committed to VCS)
+if (file_exists(__DIR__ . '/admin_config.php')) {
+    require_once __DIR__ . '/admin_config.php';
+}
 
-// Permanent Admin Credentials (active). Change for production.
-define('ADMIN_USERNAME', 'techforum_admin');
-define('ADMIN_PASSWORD', 'SecureAdmin@2025!');
+// Define defaults only if not overridden by admin_config.php
+if (!defined('ADMIN_ACCESS_TOKEN')) {
+    define('ADMIN_ACCESS_TOKEN', 'TF_SECURE_2025_ADM_PORTAL_7f3e9a2cF1B8d4'); // default placeholder
+}
+if (!defined('ADMIN_USERNAME')) {
+    define('ADMIN_USERNAME', 'techforum_admin');
+}
+if (!defined('ADMIN_PASSWORD')) {
+    define('ADMIN_PASSWORD', 'SecureAdmin@2025!');
+}
 
 $error = '';
 $token_verified = false;
@@ -310,9 +319,7 @@ if ($token_verified) {
                     </div>
                     <button type="submit">Access Admin Dashboard</button>
                     <div class="help-text" style="margin-top: 15px; text-align: center;">
-                        <strong>Admin Credentials:</strong><br>
-                        Username: <code>techforum_admin</code><br>
-                        Password: <code>SecureAdmin@2025!</code>
+                        For security, rotate credentials regularly. (Defaults active if not overridden.)
                     </div>
                 </form>
             <?php endif; ?>
