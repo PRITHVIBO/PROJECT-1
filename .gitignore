@@ -15,6 +15,11 @@ session/
 config/config.php
 config/db.php
 admin_config.php
+config/email_config.php
+email_config.php
+
+# Debug helpers (keep local only)
+debug_*.php
 
 # IDE/editor
 .vscode/
