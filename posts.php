@@ -150,6 +150,16 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $view === 'my' ? 'My Posts' : 'Browse Posts' ?> - TechForum</title>
     <link rel="stylesheet" href="assets/css/style1.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'strict',
+            flowchart: { useMaxWidth: true },
+            sequence: { useMaxWidth: true }
+        });
+    </script>
     <style>
         .posts-container {
             max-width: 1200px;
@@ -596,8 +606,8 @@ try {
 
                         <?php if (!empty($post['body'])): ?>
                             <div class="post-content">
-                                <?= nl2br(h(substr($post['body'], 0, 300))); ?>
-                                <?php if (strlen($post['body']) > 300): ?>
+                                <?= process_content_preview($post['body'], 300); ?>
+                                <?php if (strlen($post['body']) > 300 && strpos($post['body'], '```mermaid') === false): ?>
                                     <a href="post.php?id=<?= $post['id']; ?>" style="color: #667eea; text-decoration: none;">... Read more</a>
                                 <?php endif; ?>
                             </div>

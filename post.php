@@ -73,6 +73,16 @@ $replies = $repliesStmt->fetchAll();
   <meta charset="UTF-8">
   <title><?php echo h($post['title']); ?> - TechForum</title>
   <link rel="stylesheet" href="assets/css/style1.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'strict',
+      flowchart: { useMaxWidth: true },
+      sequence: { useMaxWidth: true }
+    });
+  </script>
 </head>
 
 <body>
@@ -89,7 +99,7 @@ $replies = $repliesStmt->fetchAll();
           <span>• 👁️ <?php echo (int)$post['views']; ?> views</span>
         <?php endif; ?>
       </div>
-      <div style="white-space:pre-wrap;line-height:1.5;"><?php echo nl2br(h($post['body'])); ?></div>
+      <div style="white-space:pre-wrap;line-height:1.5;"><?php echo process_content($post['body']); ?></div>
     </article>
 
     <section style="margin-top:2rem;">
@@ -114,7 +124,7 @@ $replies = $repliesStmt->fetchAll();
                   </form>
                 <?php endif; ?>
               </div>
-              <div style="white-space:pre-wrap;"><?php echo nl2br(h($r['body'])); ?></div>
+              <div style="white-space:pre-wrap;"><?php echo process_content($r['body']); ?></div>
             </li>
           <?php endforeach; ?>
         </ul>
