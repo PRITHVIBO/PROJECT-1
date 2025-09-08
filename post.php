@@ -73,15 +73,49 @@ $replies = $repliesStmt->fetchAll();
   <meta charset="UTF-8">
   <title><?php echo h($post['title']); ?> - TechForum</title>
   <link rel="stylesheet" href="assets/css/style1.css">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+  <style>
+    /* Mermaid diagram styling */
+    .mermaid {
+      margin: 1.5rem 0;
+      text-align: center;
+      background: #fafafa;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    /* Ensure diagrams are responsive */
+    .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+  <script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script>
   <script>
-    mermaid.initialize({ 
-      startOnLoad: true,
-      theme: 'default',
-      securityLevel: 'strict',
-      flowchart: { useMaxWidth: true },
-      sequence: { useMaxWidth: true }
-    });
+    // Initialize Mermaid with error handling
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'default',
+        securityLevel: 'strict',
+        flowchart: { useMaxWidth: true },
+        sequence: { useMaxWidth: true }
+      });
+    } else {
+      // Fallback if CDN is blocked - style mermaid divs as code blocks
+      document.addEventListener('DOMContentLoaded', function() {
+        const mermaidDivs = document.querySelectorAll('.mermaid');
+        mermaidDivs.forEach(div => {
+          div.style.backgroundColor = '#f8f9fa';
+          div.style.padding = '1rem';
+          div.style.borderRadius = '6px';
+          div.style.border = '1px solid #dee2e6';
+          div.style.fontFamily = 'monospace';
+          div.style.whiteSpace = 'pre';
+          div.innerHTML = '📊 Mermaid Diagram:\n\n' + div.textContent;
+        });
+      });
+    }
   </script>
 </head>
 

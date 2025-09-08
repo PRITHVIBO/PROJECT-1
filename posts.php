@@ -150,17 +150,35 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $view === 'my' ? 'My Posts' : 'Browse Posts' ?> - TechForum</title>
     <link rel="stylesheet" href="assets/css/style1.css">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script>
     <script>
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'default',
-            securityLevel: 'strict',
-            flowchart: { useMaxWidth: true },
-            sequence: { useMaxWidth: true }
-        });
+        // Initialize Mermaid with error handling
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({ 
+                startOnLoad: true,
+                theme: 'default',
+                securityLevel: 'strict',
+                flowchart: { useMaxWidth: true },
+                sequence: { useMaxWidth: true }
+            });
+        } else {
+            // Fallback if CDN is blocked - style mermaid divs as code blocks
+            document.addEventListener('DOMContentLoaded', function() {
+                const mermaidDivs = document.querySelectorAll('.mermaid');
+                mermaidDivs.forEach(div => {
+                    div.style.backgroundColor = '#f8f9fa';
+                    div.style.padding = '1rem';
+                    div.style.borderRadius = '6px';
+                    div.style.border = '1px solid #dee2e6';
+                    div.style.fontFamily = 'monospace';
+                    div.style.whiteSpace = 'pre';
+                    div.innerHTML = '📊 Mermaid Diagram:\n\n' + div.textContent;
+                });
+            });
+        }
     </script>
     <style>
+        /* Existing styles preserved */
         .posts-container {
             max-width: 1200px;
             margin: 2rem auto;
