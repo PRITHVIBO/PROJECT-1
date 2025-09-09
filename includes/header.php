@@ -1,6 +1,13 @@
 <header style="background:#667eea;color:white;padding:1rem 0;">
     <div class="tf-bar" style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px;gap:1rem;">
-        <h1 style="margin:0;font-size:1.35rem;"><a href="index.php" style="color:white;text-decoration:none;">TechForum</a></h1>
+        <div style="display:flex;align-items:center;gap:.6rem;min-width:0;">
+            <a href="https://bhavyhomes.tech" target="_blank" rel="noopener" title="Visit Tech Forum (bhavyhomes.tech)" style="display:inline-flex;align-items:center;">
+                <img src="assets/images/im.png" alt="Tech Forum" width="36" height="36" style="display:block;border-radius:6px;background:#fff;object-fit:contain;" />
+            </a>
+            <h1 style="margin:0;font-size:1.35rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                <a href="index.php" style="color:white;text-decoration:none;">TechForum</a>
+            </h1>
+        </div>
         <button id="menuToggle" aria-label="Menu" style="display:none;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:.5rem .75rem;border-radius:6px;cursor:pointer;font-size:.9rem;">Menu</button>
         <nav id="mainNav" style="display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;">
             <?php if (is_logged_in()): ?>
@@ -126,6 +133,103 @@
             }
         }
     </style>
+    <script>
+        // Inject basic SEO tags and favicon into <head>
+        (function() {
+            try {
+                var head = document.head || document.getElementsByTagName('head')[0];
+                if (!head) return;
+
+                function addOrSet(tagName, attrs) {
+                    var sel = Object.keys(attrs).map(function(k) {
+                        return '[' + k + '="' + attrs[k] + '"]';
+                    }).join('');
+                    var el = head.querySelector(tagName + sel) || document.createElement(tagName);
+                    Object.keys(attrs).forEach(function(k) {
+                        el.setAttribute(k, attrs[k]);
+                    });
+                    if (!el.parentNode) head.appendChild(el);
+                    return el;
+                }
+                // Favicon
+                addOrSet('link', {
+                    rel: 'icon',
+                    href: 'assets/images/im.png',
+                    type: 'image/png'
+                });
+                // Canonical to bhavyhomes.tech + current path
+                var canonUrl = 'https://bhavyhomes.tech' + (location.pathname || '/');
+                addOrSet('link', {
+                    rel: 'canonical',
+                    href: canonUrl
+                });
+                // Meta description
+                addOrSet('meta', {
+                    name: 'description',
+                    content: 'Tech Forum by BhavyHomes: discuss technology, academics, sports, and lifestyle. Join the community at bhavyhomes.tech.'
+                });
+                // Robots (allow indexing)
+                addOrSet('meta', {
+                    name: 'robots',
+                    content: 'index,follow'
+                });
+                // Open Graph
+                addOrSet('meta', {
+                    property: 'og:site_name',
+                    content: 'Tech Forum'
+                });
+                addOrSet('meta', {
+                    property: 'og:type',
+                    content: 'website'
+                });
+                addOrSet('meta', {
+                    property: 'og:title',
+                    content: document.title || 'Tech Forum'
+                });
+                addOrSet('meta', {
+                    property: 'og:description',
+                    content: 'Community discussions on technology and more at bhavyhomes.tech'
+                });
+                addOrSet('meta', {
+                    property: 'og:url',
+                    content: canonUrl
+                });
+                addOrSet('meta', {
+                    property: 'og:image',
+                    content: location.origin + '/assets/images/im.png'
+                });
+                // Twitter
+                addOrSet('meta', {
+                    name: 'twitter:card',
+                    content: 'summary'
+                });
+                addOrSet('meta', {
+                    name: 'twitter:title',
+                    content: document.title || 'Tech Forum'
+                });
+                addOrSet('meta', {
+                    name: 'twitter:description',
+                    content: 'Community discussions on technology and more at bhavyhomes.tech'
+                });
+                addOrSet('meta', {
+                    name: 'twitter:image',
+                    content: location.origin + '/assets/images/im.png'
+                });
+            } catch (e) {
+                // no-op
+            }
+        })();
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Tech Forum",
+            "url": "https://bhavyhomes.tech",
+            "logo": "https://bhavyhomes.tech/assets/images/im.png",
+            "sameAs": ["https://bhavyhomes.tech/"]
+        }
+    </script>
     <script>
         (function() {
             const btn = document.getElementById('menuToggle');
