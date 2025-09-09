@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config/db.php';
+require_once __DIR__ . '/includes/functions.php';
 
 // Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
@@ -28,15 +29,27 @@ if (isset($_POST['action']) && $_POST['action'] === 'handle_request' && isset($_
             $request = $stmt->fetch();
 
             if ($request) {
-                // Update user password
-                $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
-                $stmt->execute([$password_hash, $request['user_id']]);
+                // Update user password and optionally mark password_changed_at if column exists
+                try {
+                    $uCols = $pdo->query("DESCRIBE users")->fetchAll(PDO::FETCH_COLUMN, 0);
+                } catch (Throwable $te) {
+                    $uCols = [];
+                }
+                if (in_array('password_changed_at', $uCols, true)) {
+                    $stmt = $pdo->prepare("UPDATE users SET password_hash = ?, password_changed_at = NOW() WHERE id = ?");
+                    $stmt->execute([$password_hash, $request['user_id']]);
+                } else {
+                    $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
+                    $stmt->execute([$password_hash, $request['user_id']]);
+                }
 
                 // Update request status
                 $stmt = $pdo->prepare("UPDATE password_requests SET status = 'approved', admin_id = ?, admin_response = ?, response_at = NOW(), new_password = ? WHERE id = ?");
                 $stmt->execute([$admin_id, "Password reset approved. New temporary password provided.", $new_password, $request_id]);
 
-                $success = "Password reset approved. New password: <strong>$new_password</strong> (User: {$request['user_email']})";
+                // Note: Email sending was removed per request.
+
+                $success = "Password reset approved. Temporary password: <strong>$new_password</strong> (User: {$request['user_email']})";
             }
         } else {
             $reason = $_POST['reject_reason'] ?? 'Request rejected by admin';
@@ -134,7 +147,13 @@ try {
 
 // Get all users for management
 try {
-    $stmt = $pdo->query("SELECT id, username, email, created_at, is_banned, ban_reason FROM users ORDER BY created_at DESC LIMIT 20");
+    // Detect if last_login column exists
+    $uCols = $pdo->query("DESCRIBE users")->fetchAll(PDO::FETCH_COLUMN, 0);
+    $hasLastLogin = in_array('last_login', $uCols, true);
+    $select = $hasLastLogin
+        ? "id, username, email, created_at, last_login, is_banned, ban_reason"
+        : "id, username, email, created_at, NULL AS last_login, is_banned, ban_reason";
+    $stmt = $pdo->query("SELECT $select FROM users ORDER BY created_at DESC LIMIT 20");
     $users = $stmt->fetchAll();
 } catch (PDOException $e) {
     $users = [];
@@ -397,12 +416,15 @@ try {
     <div class="header">
         <h1>Admin Dashboard - Tech Forum</h1>
         <div>
-            Welcome, <?= htmlspecialchars($_SESSION['admin_username']) ?> (<?= htmlspecialchars($admin_role) ?>)
+            <a href="admin_activity.php" class="logout-btn" style="margin-right:8px;">Activity</a>
             <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </div>
 
     <div class="container">
+        <?php if (function_exists('flash_message')) {
+            flash_message();
+        } ?>
         <?php if ($error): ?>
             <div class="alert error"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
@@ -479,9 +501,11 @@ try {
                 <table>
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>Joined</th>
+                            <th>Last Login</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -489,9 +513,11 @@ try {
                     <tbody>
                         <?php foreach ($users as $user): ?>
                             <tr>
+                                <td><?= (int)$user['id'] ?></td>
                                 <td><?= htmlspecialchars($user['username']) ?></td>
                                 <td><?= htmlspecialchars($user['email']) ?></td>
                                 <td><?= date('M j, Y', strtotime($user['created_at'])) ?></td>
+                                <td><?= $user['last_login'] ? date('M j, Y H:i', strtotime($user['last_login'])) : '—' ?></td>
                                 <td>
                                     <?php if ($user['is_banned']): ?>
                                         <span class="status-banned">Banned</span>

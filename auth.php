@@ -194,6 +194,9 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                 <input type="text" name="username" placeholder="Username" required maxlength="50" pattern="[a-zA-Z0-9_-]{3,20}" title="Username must be 3-20 characters">
                 <input type="email" name="email" placeholder="Email" required maxlength="120">
                 <input type="password" name="password" placeholder="Password" required minlength="6" maxlength="255">
+                <div style="margin:10px 0 15px; text-align:left; width:100%; background:#fff8e1; color:#8a6d3b; border:1px solid #ffecb5; padding:10px 12px; border-radius:8px; font-size:12px; line-height:1.5;">
+                    ⚠️ Please save your password securely. If you lose it, recovery may take days and you’ll need to contact an admin for approval.
+                </div>
                 <button type="submit" name="register">Sign Up</button>
             </form>
         </div>

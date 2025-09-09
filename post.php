@@ -54,7 +54,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_reply'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reply'])) {
   $body = trim($_POST['body'] ?? '');
   if ($body !== '') {
-    $ins = $pdo->prepare("INSERT INTO replies (post_id,user_id,body) VALUES (?,?,?)");
+    // Detect reply text column dynamically
+    try {
+      $cols = $pdo->query("DESCRIBE replies")->fetchAll(PDO::FETCH_COLUMN, 0);
+    } catch (PDOException $e) {
+      $cols = [];
+    }
+    $textPriority = ['content', 'body', 'reply', 'message', 'text', 'comment'];
+    $replyCol = null;
+    foreach ($textPriority as $colName) {
+      if (in_array($colName, $cols, true)) {
+        $replyCol = $colName;
+        break;
+      }
+    }
+    $column = $replyCol ?: 'content';
+    $ins = $pdo->prepare("INSERT INTO replies (post_id,user_id,`$column`) VALUES (?,?,?)");
     $ins->execute([$id, current_user()['id'], $body]);
     redirect('post.php?id=' . $id);
   } else {
@@ -62,7 +77,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reply'])) {
   }
 }
 
-$repliesStmt = $pdo->prepare("SELECT r.*, u.username FROM replies r JOIN users u ON u.id=r.user_id WHERE r.post_id=? ORDER BY r.created_at ASC");
+// Build replies query using whichever text column exists
+try {
+  $rCols = $pdo->query("DESCRIBE replies")->fetchAll(PDO::FETCH_COLUMN, 0);
+} catch (PDOException $e) {
+  $rCols = [];
+}
+$textPriority = ['content', 'body', 'reply', 'message', 'text', 'comment'];
+$replyCol = null;
+foreach ($textPriority as $colName) {
+  if (in_array($colName, $rCols, true)) {
+    $replyCol = $colName;
+    break;
+  }
+}
+$replySelect = $replyCol ? ("r.`$replyCol` AS reply_body,") : ("'' AS reply_body,");
+$sql = "SELECT $replySelect r.*, u.username FROM replies r JOIN users u ON u.id=r.user_id WHERE r.post_id=? ORDER BY r.created_at ASC";
+$repliesStmt = $pdo->prepare($sql);
 $repliesStmt->execute([$id]);
 $replies = $repliesStmt->fetchAll();
 ?>
@@ -114,7 +145,7 @@ $replies = $repliesStmt->fetchAll();
                   </form>
                 <?php endif; ?>
               </div>
-              <div style="white-space:pre-wrap;"><?php echo nl2br(h($r['body'])); ?></div>
+              <div style="white-space:pre-wrap;"><?php echo nl2br(h($r['reply_body'])); ?></div>
             </li>
           <?php endforeach; ?>
         </ul>
