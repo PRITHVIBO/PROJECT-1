@@ -59,8 +59,17 @@ if (isset($_POST['action']) && $_POST['action'] === 'request_reset' && isset($_P
             padding: 0;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            /* Ensure footer stays at bottom */
+        }
+
+        main.page-main {
+            flex: 1 0 auto;
+            /* Take available height between header (none here) and footer */
+            display: flex;
             align-items: center;
             justify-content: center;
+            padding: 24px 12px;
         }
 
         .container {
@@ -218,49 +227,50 @@ if (isset($_POST['action']) && $_POST['action'] === 'request_reset' && isset($_P
     <a href="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'password_reset.php') ?>" title="Reload this page" style="position:fixed;top:10px;left:10px;z-index:10000;display:inline-flex;align-items:center;">
         <img src="assets/images/im.png" alt="Tech Forum" width="28" height="28" style="display:block;border-radius:6px;background:#fff;object-fit:contain;box-shadow:0 2px 8px rgba(0,0,0,.2);" />
     </a>
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <span class="icon">🔑</span>
-                <h1>Password Reset Request</h1>
-                <p class="subtitle">Submit a request to our admin team for password assistance</p>
-            </div>
-
-            <?php if ($error): ?>
-                <div class="error"><?= htmlspecialchars($error) ?></div>
-            <?php endif; ?>
-
-            <?php if ($success): ?>
-                <div class="success"><?= htmlspecialchars($success) ?></div>
-            <?php else: ?>
-                <div class="info-box">
-                    <strong>How it works:</strong><br>
-                    1. Enter your registered email address<br>
-                    2. Our admin team will review your request<br>
-                    3. You'll receive new login credentials via the platform<br>
-                    4. Login with your new credentials and update your password
+    <main class="page-main">
+        <div class="container">
+            <div class="card">
+                <div class="header">
+                    <span class="icon">🔑</span>
+                    <h1>Password Reset Request</h1>
+                    <p class="subtitle">Submit a request to our admin team for password assistance</p>
                 </div>
 
-                <form method="POST">
-                    <input type="hidden" name="action" value="request_reset">
-                    <div class="form-group">
-                        <label for="reset_email">Your Registered Email:</label>
-                        <input type="email" id="reset_email" name="reset_email" required placeholder="Enter your email address">
-                        <div class="help-text">
-                            Make sure to use the same email address you registered with.
-                        </div>
-                    </div>
-                    <button type="submit">Submit Reset Request</button>
-                </form>
-            <?php endif; ?>
+                <?php if ($error): ?>
+                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                <?php endif; ?>
 
-            <div class="back-link">
-                <a href="auth.php">← Back to Sign In/Sign Up</a>
+                <?php if ($success): ?>
+                    <div class="success"><?= htmlspecialchars($success) ?></div>
+                <?php else: ?>
+                    <div class="info-box">
+                        <strong>How it works:</strong><br>
+                        1. Enter your registered email address<br>
+                        2. Our admin team will review your request<br>
+                        3. You'll receive new login credentials via the platform<br>
+                        4. Login with your new credentials and update your password
+                    </div>
+
+                    <form method="POST">
+                        <input type="hidden" name="action" value="request_reset">
+                        <div class="form-group">
+                            <label for="reset_email">Your Registered Email:</label>
+                            <input type="email" id="reset_email" name="reset_email" required placeholder="Enter your email address">
+                            <div class="help-text">
+                                Make sure to use the same email address you registered with.
+                            </div>
+                        </div>
+                        <button type="submit">Submit Reset Request</button>
+                    </form>
+                <?php endif; ?>
+
+                <div class="back-link">
+                    <a href="auth.php">← Back to Sign In/Sign Up</a>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+    <?php require_once __DIR__ . '/includes/footer.php'; ?>
 </body>
-
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
 
 </html>
