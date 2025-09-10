@@ -150,6 +150,17 @@ Manual sanity checklist:
 ## 🔐 Secrets & Environment
 `config/config.php` and `config/db.php` are intentionally gitignored. Use the example files to configure your local environment. Never commit real credentials.
 
+### InfinityFree Hosting Notes
+- Update DB credentials to:
+	- DB Host: `sql302.infinityfree.com`
+	- DB Name: `if0_39902387_techforum`
+	- DB User: `if0_39902387`
+	- DB Pass: `hoIBjYQpwkCddwj`
+- phpMyAdmin: available via InfinityFree panel (server: `sql302.infinityfree.com`).
+- Update `SITE_URL` to your domain (e.g., `https://bhavyhomes.tech`).
+- Upload the `techforum` folder to `htdocs/` of your InfinityFree account.
+- Ensure file permissions allow PHP to read config files.
+
 ---
 ## 🤝 Contributing
 1. Fork
