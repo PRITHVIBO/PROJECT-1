@@ -414,7 +414,12 @@ try {
 
 <body>
     <div class="header">
-        <h1>Admin Dashboard - Tech Forum</h1>
+        <div class="brand" style="display:flex;align-items:center;gap:10px;">
+            <a href="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'admin_dashboard.php') ?>" title="Reload this page" style="display:inline-flex;align-items:center;">
+                <img src="assets/images/im.png" alt="Tech Forum" width="32" height="32" style="display:block;border-radius:6px;background:#fff;object-fit:contain;" />
+            </a>
+            <h1 style="margin:0;">Admin Dashboard - Tech Forum</h1>
+        </div>
         <div>
             <a href="admin_activity.php" class="logout-btn" style="margin-right:8px;">Activity</a>
             <a href="logout.php" class="logout-btn">Logout</a>

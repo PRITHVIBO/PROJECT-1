@@ -177,6 +177,10 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 </head>
 
 <body>
+    <!-- Floating logo (self-link) -->
+    <a href="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'auth.php') ?>" title="Reload this page" style="position:fixed;top:10px;left:10px;z-index:10000;display:inline-flex;align-items:center;">
+        <img src="assets/images/im.png" alt="Tech Forum" width="32" height="32" style="display:block;border-radius:6px;background:#fff;object-fit:contain;box-shadow:0 2px 8px rgba(0,0,0,.2);" />
+    </a>
     <!-- PHP Messages -->
     <?php if ($msg): ?>
         <div class="msg"><?= h($msg) ?></div>

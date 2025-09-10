@@ -143,7 +143,12 @@ try {
 
 <body>
     <div class="header">
-        <div>Admin Activity</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <a href="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'admin_activity.php') ?>" title="Reload this page" style="display:inline-flex;align-items:center;">
+                <img src="assets/images/im.png" alt="Tech Forum" width="28" height="28" style="display:block;border-radius:6px;background:#fff;object-fit:contain;" />
+            </a>
+            <div>Admin Activity</div>
+        </div>
         <div><a class="btn" href="admin_dashboard.php">Back to Dashboard</a></div>
     </div>
     <div class="container">

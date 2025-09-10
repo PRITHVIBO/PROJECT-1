@@ -1,7 +1,7 @@
 <header style="background:#667eea;color:white;padding:1rem 0;">
     <div class="tf-bar" style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px;gap:1rem;">
         <div style="display:flex;align-items:center;gap:.6rem;min-width:0;">
-            <a href="index.php" title="TechForum Home" style="display:inline-flex;align-items:center;">
+            <a href="<?php echo htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'index.php'); ?>" title="Reload this page" style="display:inline-flex;align-items:center;">
                 <img src="assets/images/im.png" alt="Tech Forum" width="36" height="36" style="display:block;border-radius:6px;background:#fff;object-fit:contain;" />
             </a>
             <h1 style="margin:0;font-size:1.35rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
@@ -232,7 +232,8 @@
                     ld.textContent = JSON.stringify(data);
                     head.appendChild(ld);
                 } catch (e) {
-                    /* no-op */ }
+                    /* no-op */
+                }
             } catch (e) {
                 // no-op
             }
