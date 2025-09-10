@@ -15,6 +15,7 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In / Sign Up - TechForum</title>
     <!-- Connect your external CSS file -->
+    <link rel="icon" href="assets/images/im.png" type="image/png">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body {
@@ -352,6 +353,9 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
     <!-- Debug script to test functionality -->
     <script>
         // Debug: Check if functions are loaded
+
+        <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM loaded');
 

@@ -78,6 +78,7 @@ if ($token_verified) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Forum - Secure Admin Access</title>
+    <link rel="icon" href="assets/images/im.png" type="image/png">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -337,5 +338,7 @@ if ($token_verified) {
         // No JavaScript needed - simplified admin login
     </script>
 </body>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
 
 </html>

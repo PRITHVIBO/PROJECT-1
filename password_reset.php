@@ -50,6 +50,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'request_reset' && isset($_P
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Forum - Password Reset Request</title>
+    <link rel="icon" href="assets/images/im.png" type="image/png">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -259,5 +260,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'request_reset' && isset($_P
         </div>
     </div>
 </body>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
 
 </html>

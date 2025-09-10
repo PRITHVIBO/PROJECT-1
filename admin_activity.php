@@ -66,6 +66,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Admin Activity - Tech Forum</title>
+    <link rel="icon" href="assets/images/im.png" type="image/png">
     <style>
         body {
             font-family: Arial, sans-serif;

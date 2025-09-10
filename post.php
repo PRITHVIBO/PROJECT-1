@@ -103,6 +103,7 @@ $replies = $repliesStmt->fetchAll();
 <head>
   <meta charset="UTF-8">
   <title><?php echo h($post['title']); ?> - TechForum</title>
+  <link rel="icon" href="assets/images/im.png" type="image/png">
   <link rel="stylesheet" href="assets/css/style1.css">
 </head>
 

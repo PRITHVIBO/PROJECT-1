@@ -11,6 +11,7 @@ exit;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Forum - Login & Password Reset</title>
+    <link rel="icon" href="assets/images/im.png" type="image/png">
     <style>
         body {
             font-family: Arial, sans-serif;
