@@ -157,7 +157,7 @@ Manual sanity checklist:
 	- DB User: `if0_39902387`
 	- DB Pass: `hoIBjYQpwkCddwj`
 - phpMyAdmin: available via InfinityFree panel (server: `sql302.infinityfree.com`).
-- Update `SITE_URL` to your domain (e.g., `https://bhavyhomes.tech`).
+- Update `SITE_URL` to your domain (e.g., `https://your-custom-domain.example`).
 - Upload the `techforum` folder to `htdocs/` of your InfinityFree account.
 - Ensure file permissions allow PHP to read config files.
 

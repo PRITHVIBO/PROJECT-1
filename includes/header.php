@@ -1,7 +1,7 @@
 <header style="background:#667eea;color:white;padding:1rem 0;">
     <div class="tf-bar" style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 20px;gap:1rem;">
         <div style="display:flex;align-items:center;gap:.6rem;min-width:0;">
-            <a href="https://bhavyhomes.tech" target="_blank" rel="noopener" title="Visit Tech Forum (bhavyhomes.tech)" style="display:inline-flex;align-items:center;">
+            <a href="index.php" title="TechForum Home" style="display:inline-flex;align-items:center;">
                 <img src="assets/images/im.png" alt="Tech Forum" width="36" height="36" style="display:block;border-radius:6px;background:#fff;object-fit:contain;" />
             </a>
             <h1 style="margin:0;font-size:1.35rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
@@ -157,8 +157,9 @@
                     href: 'assets/images/im.png',
                     type: 'image/png'
                 });
-                // Canonical to bhavyhomes.tech + current path
-                var canonUrl = 'https://bhavyhomes.tech' + (location.pathname || '/');
+                // Canonical to current origin + path (domain-agnostic)
+                var origin = (location.origin || (location.protocol + '//' + location.host));
+                var canonUrl = origin + (location.pathname || '/');
                 addOrSet('link', {
                     rel: 'canonical',
                     href: canonUrl
@@ -166,7 +167,7 @@
                 // Meta description
                 addOrSet('meta', {
                     name: 'description',
-                    content: 'Tech Forum by BhavyHomes: discuss technology, academics, sports, and lifestyle. Join the community at bhavyhomes.tech.'
+                    content: 'TechForum: community discussions on technology, academics, sports, and lifestyle. Join and share your thoughts.'
                 });
                 // Robots (allow indexing)
                 addOrSet('meta', {
@@ -188,7 +189,7 @@
                 });
                 addOrSet('meta', {
                     property: 'og:description',
-                    content: 'Community discussions on technology and more at bhavyhomes.tech'
+                    content: 'Community discussions on technology, academics, sports, and lifestyle.'
                 });
                 addOrSet('meta', {
                     property: 'og:url',
@@ -196,7 +197,7 @@
                 });
                 addOrSet('meta', {
                     property: 'og:image',
-                    content: location.origin + '/assets/images/im.png'
+                    content: origin + '/assets/images/im.png'
                 });
                 // Twitter
                 addOrSet('meta', {
@@ -209,26 +210,33 @@
                 });
                 addOrSet('meta', {
                     name: 'twitter:description',
-                    content: 'Community discussions on technology and more at bhavyhomes.tech'
+                    content: 'Community discussions on technology, academics, sports, and lifestyle.'
                 });
                 addOrSet('meta', {
                     name: 'twitter:image',
-                    content: location.origin + '/assets/images/im.png'
+                    content: origin + '/assets/images/im.png'
                 });
+
+                // Structured data (Organization) via JSON-LD, generated dynamically
+                try {
+                    var ld = document.createElement('script');
+                    ld.type = 'application/ld+json';
+                    var data = {
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        "name": "Tech Forum",
+                        "url": origin,
+                        "logo": origin + "/assets/images/im.png",
+                        "sameAs": [origin]
+                    };
+                    ld.textContent = JSON.stringify(data);
+                    head.appendChild(ld);
+                } catch (e) {
+                    /* no-op */ }
             } catch (e) {
                 // no-op
             }
         })();
-    </script>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Tech Forum",
-            "url": "https://bhavyhomes.tech",
-            "logo": "https://bhavyhomes.tech/assets/images/im.png",
-            "sameAs": ["https://bhavyhomes.tech/"]
-        }
     </script>
     <script>
         (function() {
