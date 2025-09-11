@@ -22,6 +22,7 @@ $memberSince = $pdo->query("SELECT DATE_FORMAT(created_at, '%b %Y') AS joined FR
   <meta charset="UTF-8">
   <title>Dashboard - TechForum</title>
   <link rel="icon" href="assets/images/im.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="/assets/css/dashboard.css">
 </head>
 

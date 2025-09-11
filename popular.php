@@ -14,6 +14,7 @@ $popular = $stmt->fetchAll();
   <meta charset="UTF-8">
   <title>Popular - TechForum</title>
   <link rel="icon" href="assets/images/im.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/style3.css">
 </head>
 

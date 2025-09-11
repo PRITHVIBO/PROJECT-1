@@ -16,6 +16,7 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
     <title>Sign In / Sign Up - TechForum</title>
     <!-- Connect your external CSS file -->
     <link rel="icon" href="assets/images/im.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body {

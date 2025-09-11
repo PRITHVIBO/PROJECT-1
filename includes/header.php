@@ -157,6 +157,11 @@
                     href: 'assets/images/im.png',
                     type: 'image/png'
                 });
+                // Global responsive stylesheet (idempotent)
+                addOrSet('link', {
+                    rel: 'stylesheet',
+                    href: 'assets/css/responsive.css'
+                });
                 // Canonical to current origin + path (domain-agnostic)
                 var origin = (location.origin || (location.protocol + '//' + location.host));
                 var canonUrl = origin + (location.pathname || '/');

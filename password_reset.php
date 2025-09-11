@@ -51,6 +51,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'request_reset' && isset($_P
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Forum - Password Reset Request</title>
     <link rel="icon" href="assets/images/im.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

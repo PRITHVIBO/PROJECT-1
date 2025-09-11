@@ -1,0 +1,134 @@
+/* Global responsive enhancements for TechForum */
+
+/* Base: ensure media elements and tables adapt */
+img,
+video,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Let long code/links wrap gracefully */
+pre,
+code,
+.mono {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Responsive containers and paddings */
+@media (max-width: 1200px) {
+
+    .container,
+    .posts-container,
+    .edit-container,
+    .about-wrapper,
+    main,
+    main[class] {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+
+    .stats-grid,
+    .grid-2,
+    .grid-3,
+    .grid-auto,
+    .dashboard-main .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px !important;
+    }
+
+    .posts-header,
+    .post-header,
+    .message-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+}
+
+/* Phone */
+@media (max-width: 768px) {
+
+    .stats-grid,
+    .grid-2,
+    .grid-3,
+    .grid-auto,
+    .dashboard-main .stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Tables: horizontal scroll on small screens */
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        white-space: nowrap;
+    }
+
+    /* Buttons and actions wrap */
+    .post-actions,
+    .form-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .btn,
+    .btn-small,
+    .btn-primary,
+    .btn-secondary {
+        max-width: 100%;
+    }
+
+    /* Cards paddings */
+    .card,
+    .post-item,
+    .post-card,
+    .edit-form,
+    .profile-wrapper,
+    .about-wrapper {
+        padding: 16px !important;
+    }
+
+    /* Headings scale slightly down */
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        font-size: 1.05rem;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+
+    .btn,
+    button,
+    .btn-small {
+        padding: 10px 12px !important;
+        font-size: 0.9rem;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 1rem;
+    }
+}
