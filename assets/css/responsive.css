@@ -108,26 +108,26 @@ main.page-main {
         padding: 16px !important;
     }
 
-    /* Auth/Admin single-column forms */
-    .container,
-    .container * {
+    /* Auth/Admin single-column forms (exclude auth/forgot pages) */
+    body:not(.page-auth):not(.page-reset) .container,
+    body:not(.page-auth):not(.page-reset) .container * {
         box-sizing: border-box;
     }
 
-    .form-container form,
-    .card form {
-        width: 100% !important;
+    body:not(.page-auth):not(.page-reset) .form-container form,
+    body:not(.page-auth):not(.page-reset) .card form {
+        width: 100%;
     }
 
-    .form-container input,
-    .card input,
-    .card button,
-    .form-container button {
-        width: 100% !important;
+    body:not(.page-auth):not(.page-reset) .form-container input,
+    body:not(.page-auth):not(.page-reset) .card input,
+    body:not(.page-auth):not(.page-reset) .card button,
+    body:not(.page-auth):not(.page-reset) .form-container button {
+        width: 100%;
     }
 
     /* Ensure page-main centers content vertically on small screens */
-    main.page-main {
+    body:not(.page-auth):not(.page-reset) main.page-main {
         padding: 16px !important;
         align-items: center !important;
         justify-content: center !important;
