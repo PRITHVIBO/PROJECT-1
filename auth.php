@@ -173,10 +173,64 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
             background-color: rgba(102, 126, 234, 0.1) !important;
             color: #764ba2 !important;
         }
+
+        /* Mobile readability tweaks */
+        @media (max-width: 768px) {
+            main.page-main {
+                padding: 16px;
+            }
+
+            .container {
+                margin: 8px auto;
+                border-radius: 18px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .form-container h1 {
+                font-size: 22px;
+            }
+
+            .form-container span {
+                font-size: 12px;
+                color: #555;
+            }
+
+            .container input {
+                font-size: 14px;
+                padding: 12px 14px;
+            }
+
+            .container button {
+                padding: 12px 18px;
+            }
+
+            /* Make the warning act like a button on mobile */
+            .mobile-action-warning {
+                background: linear-gradient(135deg, #ffecb5 0%, #ffd36e 100%) !important;
+                color: #5c3b00 !important;
+                border: 1px solid #ffc861 !important;
+                text-align: center !important;
+                padding: 12px 14px !important;
+                border-radius: 10px !important;
+                font-size: 13px !important;
+                font-weight: 700 !important;
+                cursor: pointer !important;
+                user-select: none;
+                box-shadow: 0 3px 10px rgba(255, 193, 7, 0.25);
+                transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+            }
+
+            .mobile-action-warning:active {
+                transform: translateY(1px);
+                box-shadow: 0 2px 6px rgba(255, 193, 7, 0.25);
+                filter: brightness(0.98);
+            }
+        }
     </style>
 </head>
 
-<body>
+<body class="page-auth">
+    <?php require_once __DIR__ . '/includes/header.php'; ?>
     <!-- PHP Messages -->
     <?php if ($msg): ?>
         <div class="msg"><?= h($msg) ?></div>
@@ -184,32 +238,33 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 
     <?php flash_message(); ?>
 
-    <div class="container" id="container">
-        <!-- Sign Up Form -->
-        <div class="form-container sign-up">
-            <form action="auth/register.php" method="POST" autocomplete="off">
-                <input type="hidden" name="register" value="1">
-                <h1>Create Account</h1>
-                <span>or use your email for registration</span>
-                <input type="text" name="username" placeholder="Username" required maxlength="50" pattern="[a-zA-Z0-9_-]{3,20}" title="Username must be 3-20 characters">
-                <input type="email" name="email" placeholder="Email" required maxlength="120">
-                <input type="password" name="password" placeholder="Password" required minlength="6" maxlength="255">
-                <div style="margin:10px 0 15px; text-align:left; width:100%; background:#fff8e1; color:#8a6d3b; border:1px solid #ffecb5; padding:10px 12px; border-radius:8px; font-size:12px; line-height:1.5;">
-                    ⚠️ Please save your password securely. If you lose it, recovery may take days and you’ll need to contact an admin for approval.
-                </div>
-                <button type="submit" name="register">Sign Up</button>
-            </form>
-        </div>
+    <main class="page-main">
+        <div class="container" id="container">
+            <!-- Sign Up Form -->
+            <div class="form-container sign-up">
+                <form action="auth/register.php" method="POST" autocomplete="off">
+                    <input type="hidden" name="register" value="1">
+                    <h1>Create Account</h1>
+                    <span>or use your email for registration</span>
+                    <input type="text" name="username" placeholder="Username" required maxlength="50" pattern="[a-zA-Z0-9_-]{3,20}" title="Username must be 3-20 characters">
+                    <input type="email" name="email" placeholder="Email" required maxlength="120">
+                    <input type="password" name="password" placeholder="Password" required minlength="6" maxlength="255">
+                    <div id="signup-warning" class="mobile-action-warning" role="button" tabindex="0" onclick="showForgotPassword(event)" onkeydown="if(event.key==='Enter'||event.key===' '){showForgotPassword(event)}" style="margin:10px 0 15px; text-align:left; width:100%; background:#fff8e1; color:#8a6d3b; border:1px solid #ffecb5; padding:10px 12px; border-radius:8px; font-size:12px; line-height:1.5;">
+                        ⚠️ Please save your password securely. If you lose it, recovery may take days and you’ll need to contact an admin for approval.
+                    </div>
+                    <button type="submit" name="register">Sign Up</button>
+                </form>
+            </div>
 
-        <!-- Sign In Form -->
-        <div class="form-container sign-in">
-            <form action="auth/login.php" method="POST" autocomplete="off">
-                <input type="hidden" name="login" value="1">
-                <h1>Sign In</h1>
-                <span>or use your account</span>
-                <input type="email" name="email" placeholder="Email" required maxlength="120">
-                <input type="password" name="password" placeholder="Password" required>
-                <a href="#" onclick="showForgotPassword()" style="
+            <!-- Sign In Form -->
+            <div class="form-container sign-in">
+                <form action="auth/login.php" method="POST" autocomplete="off">
+                    <input type="hidden" name="login" value="1">
+                    <h1>Sign In</h1>
+                    <span>or use your account</span>
+                    <input type="email" name="email" placeholder="Email" required maxlength="120">
+                    <input type="password" name="password" placeholder="Password" required>
+                    <a href="#" onclick="showForgotPassword()" style="
                     color: #667eea; 
                     font-size: 13px; 
                     text-decoration: none; 
@@ -218,11 +273,11 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                     padding: 4px 8px;
                     border-radius: 4px;
                 " class="forgot-password-link">
-                    🔐 Forgot your password?
-                </a>
-                <button type="submit" name="login">Sign In</button>
-                <div style="text-align: center; margin-top: 15px;">
-                    <button type="button" onclick="showAdminAccess()" style="
+                        🔐 Forgot your password?
+                    </a>
+                    <button type="submit" name="login">Sign In</button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button type="button" onclick="showAdminAccess()" style="
                         display: inline-block;
                         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
                         color: white;
@@ -235,10 +290,10 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                         transition: transform 0.3s ease;
                         cursor: pointer;
                     " onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
-                        🔒 Admin Access
-                    </button>
-                    <div style="margin-top:10px;">
-                        <a href="index.php" style="
+                            🔒 Admin Access
+                        </button>
+                        <div style="margin-top:10px;">
+                            <a href="index.php" style="
                             display: inline-block;
                             background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
                             color: white;
@@ -252,45 +307,45 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                             transition: transform 0.3s ease, box-shadow .3s ease;
                             box-shadow: 0 4px 12px rgba(91,134,229,.35);
                         " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 18px rgba(91,134,229,.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(91,134,229,.35)'">
-                            🌐 Visit Tech Forum
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Forgot Password Form -->
-        <div class="form-container forgot-password" id="forgotPassword">
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 0 40px; background-color: #fff;">
-                <div style="text-align: center; max-width: 450px; width: 100%;">
-                    <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 32px; font-weight: 600; color: #2a5298; margin-bottom: 15px;">🔑 Password Recovery</h1>
-                    <p style="color: #667eea; font-weight: 500; margin-bottom: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; line-height: 1.4;">Don't worry! We'll help you regain access to your account.</p>
-
-                    <!-- Step-by-step instructions -->
-                    <div style="background: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%); padding: 25px; border-radius: 15px; margin-bottom: 30px; text-align: left; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);">
-                        <h3 style="color: #667eea; margin: 0 0 20px 0; font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; text-align: center;">📋 How it works:</h3>
-                        <div style="color: #495057; font-size: 16px; line-height: 1.8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                            <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
-                                <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">1.</span>
-                                <span>Click the button below to go to our password reset page</span>
-                            </div>
-                            <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
-                                <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">2.</span>
-                                <span>Enter your registered email address</span>
-                            </div>
-                            <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
-                                <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">3.</span>
-                                <span>Our admin team will review your request</span>
-                            </div>
-                            <div style="display: flex; align-items: flex-start;">
-                                <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">4.</span>
-                                <span>You'll receive new login credentials via our platform</span>
-                            </div>
+                                🌐 Visit Tech Forum
+                            </a>
                         </div>
                     </div>
+                </form>
+            </div>
 
-                    <div style="text-align: center; margin: 30px 0;">
-                        <a href="password_reset.php" style="
+            <!-- Forgot Password Form -->
+            <div class="form-container forgot-password" id="forgotPassword">
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 0 40px; background-color: #fff;">
+                    <div style="text-align: center; max-width: 450px; width: 100%;">
+                        <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 32px; font-weight: 600; color: #2a5298; margin-bottom: 15px;">🔑 Password Recovery</h1>
+                        <p style="color: #667eea; font-weight: 500; margin-bottom: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; line-height: 1.4;">Don't worry! We'll help you regain access to your account.</p>
+
+                        <!-- Step-by-step instructions -->
+                        <div style="background: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%); padding: 25px; border-radius: 15px; margin-bottom: 30px; text-align: left; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);">
+                            <h3 style="color: #667eea; margin: 0 0 20px 0; font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; text-align: center;">📋 How it works:</h3>
+                            <div style="color: #495057; font-size: 16px; line-height: 1.8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                                <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                                    <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">1.</span>
+                                    <span>Click the button below to go to our password reset page</span>
+                                </div>
+                                <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                                    <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">2.</span>
+                                    <span>Enter your registered email address</span>
+                                </div>
+                                <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                                    <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">3.</span>
+                                    <span>Our admin team will review your request</span>
+                                </div>
+                                <div style="display: flex; align-items: flex-start;">
+                                    <span style="color: #667eea; font-weight: bold; margin-right: 12px; font-size: 18px;">4.</span>
+                                    <span>You'll receive new login credentials via our platform</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin: 30px 0;">
+                            <a href="password_reset.php" style="
                             display: inline-block;
                             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                             color: white;
@@ -302,15 +357,15 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                             transition: all 0.3s ease;
                             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
                         " class="password-reset-btn" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.3)'">
-                            🚀 Start Password Reset
-                        </a>
-                    </div>
+                                🚀 Start Password Reset
+                            </a>
+                        </div>
 
-                    <p style="font-size: 15px; color: #6c757d; margin-bottom: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500;">
-                        ⏱️ <strong>Response time:</strong> Usually within 24 hours during business days
-                    </p>
+                        <p style="font-size: 15px; color: #6c757d; margin-bottom: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500;">
+                            ⏱️ <strong>Response time:</strong> Usually within 24 hours during business days
+                        </p>
 
-                    <button type="button" style="
+                        <button type="button" style="
                         background: #6c757d;
                         color: white;
                         border: none;
@@ -321,26 +376,27 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                         font-weight: 600;
                         transition: all 0.3s ease;
                     " onmouseover="this.style.background='#5a6268'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#6c757d'; this.style.transform='translateY(0)'" onclick="hideForgotPassword()">← Back to Sign In</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Toggle Container -->
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
-                    <button class="hidden" id="login">Sign In</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Register with your personal details to use all of site features</p>
-                    <button class="hidden" id="register">Sign Up</button>
+            <!-- Toggle Container -->
+            <div class="toggle-container">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <h1>Welcome Back!</h1>
+                        <p>Enter your personal details to use all of site features</p>
+                        <button class="hidden" id="login">Sign In</button>
+                    </div>
+                    <div class="toggle-panel toggle-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Register with your personal details to use all of site features</p>
+                        <button class="hidden" id="register">Sign Up</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- External JavaScript file -->
     <script src="assets/js/auth.js"></script>
@@ -376,6 +432,7 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
             }
         });
     </script>
+    <?php require_once __DIR__ . '/includes/footer.php'; ?>
 </body>
 
 </html>
