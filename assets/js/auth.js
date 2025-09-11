@@ -6,47 +6,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (registerBtn) {
         registerBtn.addEventListener('click', function () {
-            if (container) {
-                container.classList.add('active');
-            } else {
-                console.warn('Auth container not found: cannot activate register view');
-            }
+            container.classList.add('active');
         });
     }
 
     if (loginBtn) {
         loginBtn.addEventListener('click', function () {
-            if (container) {
-                container.classList.remove('active');
-            } else {
-                console.warn('Auth container not found: cannot activate login view');
-            }
+            container.classList.remove('active');
         });
     }
 
     // Forgot password functionality with smooth transitions
-    // Accept an optional event to avoid relying on the implicit global `event`
-    window.showForgotPassword = function (e) {
+    window.showForgotPassword = function () {
         const container = document.getElementById('container');
 
-        // Prevent default for anchor clicks
-        if (e && typeof e.preventDefault === 'function') e.preventDefault();
-
-        // Add loading effect (be defensive in case no event/element)
-        const forgotLink = (e && (e.currentTarget || e.target)) || document.querySelector('.forgot-password-link');
-        const originalText = forgotLink ? forgotLink.innerHTML : null;
-        if (forgotLink) {
-            forgotLink.innerHTML = '⏳ Loading...';
-            forgotLink.style.pointerEvents = 'none';
-        }
+        // Add loading effect
+        const forgotLink = event.target;
+        const originalText = forgotLink.innerHTML;
+        forgotLink.innerHTML = '⏳ Loading...';
+        forgotLink.style.pointerEvents = 'none';
 
         // Smooth transition
         setTimeout(() => {
             container.classList.add("forgot");
-            if (forgotLink) {
-                forgotLink.innerHTML = originalText;
-                forgotLink.style.pointerEvents = 'auto';
-            }
+            forgotLink.innerHTML = originalText;
+            forgotLink.style.pointerEvents = 'auto';
 
             // Add subtle animation to the forgot password form
             const forgotForm = document.getElementById('forgotPassword');
@@ -139,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 " onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e1e5e9'">
                 
                 <div style="display: flex; gap: 10px; justify-content: center;">
-                    <button onclick="verifyAdminToken(event)" style="
+                    <button onclick="verifyAdminToken()" style="
                         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                         color: white;
                         padding: 12px 24px;
@@ -216,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Verify admin token function
-    window.verifyAdminToken = function (e) {
+    window.verifyAdminToken = function () {
         const token = document.getElementById('adminToken').value;
         const errorDiv = document.getElementById('tokenError');
 
@@ -227,12 +211,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Show loading
-        const submitBtn = (e && (e.currentTarget || e.target)) || document.querySelector('#adminTokenOverlay button');
-        const originalText = submitBtn ? submitBtn.textContent : null;
-        if (submitBtn) {
-            submitBtn.textContent = 'Verifying...';
-            submitBtn.disabled = true;
-        }
+        const submitBtn = event.target;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Verifying...';
+        submitBtn.disabled = true;
 
         // Create a form and submit the token to admin_access.php
         const form = document.createElement('form');
@@ -263,17 +245,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 300);
         }
     };
-
-    // Ensure the Forgot Password link always works, even without inline handlers
-    const forgotLinkEl = document.querySelector('.forgot-password-link');
-    if (forgotLinkEl) {
-        forgotLinkEl.addEventListener('click', function (e) {
-            // Delegate to the exported handler
-            if (typeof window.showForgotPassword === 'function') {
-                window.showForgotPassword(e);
-            }
-        });
-    }
 
     // Auto-hide messages after 5 seconds
     const messages = document.querySelectorAll('.msg, .flash-message');

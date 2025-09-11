@@ -7,8 +7,6 @@ require_once 'init.php';
 <head>
     <meta charset="UTF-8">
     <title>About & How It Works - TechForum</title>
-    <link rel="icon" href="assets/images/im.png" type="image/png">
-    <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/style1.css">
     <style>
         .about-wrapper {

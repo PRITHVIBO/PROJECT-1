@@ -117,8 +117,6 @@ function sql_suggestion($table, $column)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schema Check - Tech Forum</title>
-    <link rel="icon" href="assets/images/im.png" type="image/png">
-    <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
         body {
             font-family: Arial, sans-serif;

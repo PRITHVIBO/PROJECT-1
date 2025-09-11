@@ -86,8 +86,6 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspect User - <?= h($user['username']) ?> | Tech Forum</title>
-    <link rel="icon" href="assets/images/im.png" type="image/png">
-    <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -169,12 +167,7 @@ try {
 
 <body>
     <div class="header">
-        <div style="display:flex;align-items:center;gap:10px;">
-            <a href="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? ('admin_user_inspect.php?user_id=' . (int)$user['id'])) ?>" title="Reload this page" style="display:inline-flex;align-items:center;">
-                <img src="assets/images/im.png" alt="Tech Forum" width="28" height="28" style="display:block;border-radius:6px;background:#fff;object-fit:contain;" />
-            </a>
-            <div>Inspect User: <?= h($user['username']) ?> (ID <?= (int)$user['id'] ?>)</div>
-        </div>
+        <div>Inspect User: <?= h($user['username']) ?> (ID <?= (int)$user['id'] ?>)</div>
         <div><a class="btn" href="admin_dashboard.php">Back to Dashboard</a></div>
     </div>
     <div class="container">

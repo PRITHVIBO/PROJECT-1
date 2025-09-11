@@ -8,16 +8,15 @@
 }
 
 body {
-    background-image: url('../images/dsi.jpg');
-    /* path corrected relative to css file */
+    background-image: url('assets/images/dsi.jpg');
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    /* layout column to allow footer at bottom */
-    min-height: 100vh;
-    /* allow page to grow beyond viewport when needed */
+    height: 100vh;
     position: relative;
 }
 
@@ -73,17 +72,6 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 32px;
-    /* space above footer */
-}
-
-@media (max-width: 768px) {
-
-    /* Avoid full-viewport forcing footer overlap on small screens */
-    .container {
-        min-height: 420px;
-        border-radius: 18px;
-    }
 }
 
 .container.forgot .sign-in {
@@ -273,7 +261,6 @@ body::before {
 }
 
 @keyframes move {
-
     0%,
     49.99% {
         opacity: 0;
@@ -381,7 +368,6 @@ body::before {
 }
 
 @keyframes float {
-
     0%,
     100% {
         transform: translateY(0px);
@@ -424,7 +410,6 @@ body::before {
 }
 
 @keyframes typing {
-
     0%,
     100% {
         width: 0;
@@ -487,7 +472,6 @@ body::before {
 }
 
 @keyframes progressAnimation {
-
     0%,
     100% {
         width: 70%;
