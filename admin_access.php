@@ -88,8 +88,17 @@ if ($token_verified) {
             padding: 0;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            /* allow footer at bottom */
+        }
+
+        /* Center the content area and leave space for footer */
+        main.page-main {
+            flex: 1 0 auto;
+            display: flex;
             align-items: center;
             justify-content: center;
+            padding: 24px 12px;
         }
 
         .container {
@@ -271,75 +280,76 @@ if ($token_verified) {
     <a href="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? 'admin_access.php') ?>" title="Reload this page" style="position:fixed;top:10px;left:10px;z-index:10000;display:inline-flex;align-items:center;">
         <img src="assets/images/im.png" alt="Tech Forum" width="28" height="28" style="display:block;border-radius:6px;background:#fff;object-fit:contain;box-shadow:0 2px 8px rgba(0,0,0,.2);" />
     </a>
-    <div class="container">
-        <div class="card">
-            <?php if (!$token_verified): ?>
-                <div class="security-header">
-                    <span class="security-icon">🔒</span>
-                    <h1>Secure Admin Access</h1>
-                    <p class="subtitle">Enter security token to access admin portal</p>
-                </div>
+    <main class="page-main">
+        <div class="container">
+            <div class="card">
+                <?php if (!$token_verified): ?>
+                    <div class="security-header">
+                        <span class="security-icon">🔒</span>
+                        <h1>Secure Admin Access</h1>
+                        <p class="subtitle">Enter security token to access admin portal</p>
+                    </div>
 
-                <?php if ($error): ?>
-                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                    <?php if ($error): ?>
+                        <div class="error"><?= htmlspecialchars($error) ?></div>
+                    <?php endif; ?>
+
+                    <div class="security-warning">
+                        <strong>⚠️ Authorized Access Only:</strong> This portal is restricted to authorized administrators only. Unauthorized access attempts are logged and monitored.
+                    </div>
+
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="security_token">Security Token:</label>
+                            <input type="password" id="security_token" name="security_token" required placeholder="Enter your security token">
+                            <div class="help-text">Contact your system administrator if you don't have the security token.</div>
+                        </div>
+                        <button type="submit">Verify Token & Access Admin Portal</button>
+                    </form>
+
+                    <div class="token-help">
+                        <strong>For developers:</strong> The security token is defined in the admin_access.php file. Change the ADMIN_ACCESS_TOKEN constant to your own secure value.
+                    </div>
+
+                <?php else: ?>
+                    <div class="security-header">
+                        <span class="security-icon">✅</span>
+                        <h1>Admin Portal Access</h1>
+                        <p class="subtitle">Security token verified - Enter admin credentials</p>
+                    </div>
+
+                    <?php if ($login_error): ?>
+                        <div class="error"><?= htmlspecialchars($login_error) ?></div>
+                    <?php endif; ?>
+
+                    <form method="POST">
+                        <input type="hidden" name="action" value="admin_login">
+                        <div class="form-group">
+                            <label for="admin_username">Admin Username:</label>
+                            <input type="text" id="admin_username" name="admin_username" required placeholder="Enter admin username">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin_password">Admin Password:</label>
+                            <input type="password" id="admin_password" name="admin_password" required placeholder="Enter admin password">
+                        </div>
+                        <button type="submit">Access Admin Dashboard</button>
+                        <div class="help-text" style="margin-top: 15px; text-align: center;">
+                            For security, rotate credentials regularly. (Defaults active if not overridden.)
+                        </div>
+                    </form>
                 <?php endif; ?>
 
-                <div class="security-warning">
-                    <strong>⚠️ Authorized Access Only:</strong> This portal is restricted to authorized administrators only. Unauthorized access attempts are logged and monitored.
+                <div class="back-link">
+                    <a href="index.php">← Back to Tech Forum</a>
                 </div>
-
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="security_token">Security Token:</label>
-                        <input type="password" id="security_token" name="security_token" required placeholder="Enter your security token">
-                        <div class="help-text">Contact your system administrator if you don't have the security token.</div>
-                    </div>
-                    <button type="submit">Verify Token & Access Admin Portal</button>
-                </form>
-
-                <div class="token-help">
-                    <strong>For developers:</strong> The security token is defined in the admin_access.php file. Change the ADMIN_ACCESS_TOKEN constant to your own secure value.
-                </div>
-
-            <?php else: ?>
-                <div class="security-header">
-                    <span class="security-icon">✅</span>
-                    <h1>Admin Portal Access</h1>
-                    <p class="subtitle">Security token verified - Enter admin credentials</p>
-                </div>
-
-                <?php if ($login_error): ?>
-                    <div class="error"><?= htmlspecialchars($login_error) ?></div>
-                <?php endif; ?>
-
-                <form method="POST">
-                    <input type="hidden" name="action" value="admin_login">
-                    <div class="form-group">
-                        <label for="admin_username">Admin Username:</label>
-                        <input type="text" id="admin_username" name="admin_username" required placeholder="Enter admin username">
-                    </div>
-                    <div class="form-group">
-                        <label for="admin_password">Admin Password:</label>
-                        <input type="password" id="admin_password" name="admin_password" required placeholder="Enter admin password">
-                    </div>
-                    <button type="submit">Access Admin Dashboard</button>
-                    <div class="help-text" style="margin-top: 15px; text-align: center;">
-                        For security, rotate credentials regularly. (Defaults active if not overridden.)
-                    </div>
-                </form>
-            <?php endif; ?>
-
-            <div class="back-link">
-                <a href="index.php">← Back to Tech Forum</a>
             </div>
         </div>
-    </div>
+    </main>
+    <?php require_once __DIR__ . '/includes/footer.php'; ?>
 
     <script>
         // No JavaScript needed - simplified admin login
     </script>
 </body>
-
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
 
 </html>

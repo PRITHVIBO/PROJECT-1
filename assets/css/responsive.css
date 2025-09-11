@@ -102,6 +102,31 @@ code,
         padding: 16px !important;
     }
 
+    /* Auth/Admin single-column forms */
+    .container,
+    .container * {
+        box-sizing: border-box;
+    }
+
+    .form-container form,
+    .card form {
+        width: 100% !important;
+    }
+
+    .form-container input,
+    .card input,
+    .card button,
+    .form-container button {
+        width: 100% !important;
+    }
+
+    /* Ensure page-main centers content vertically on small screens */
+    main.page-main {
+        padding: 16px !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
     /* Headings scale slightly down */
     h1 {
         font-size: 1.6rem;
