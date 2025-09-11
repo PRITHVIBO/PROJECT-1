@@ -16,6 +16,12 @@ code,
     word-break: break-word;
 }
 
+/* Base layout helpers */
+main.page-main {
+    padding: 24px 16px 56px;
+    /* bottom padding keeps content clear of footer */
+}
+
 /* Responsive containers and paddings */
 @media (max-width: 1200px) {
 
