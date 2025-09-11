@@ -16,8 +16,9 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
     <title>Sign In / Sign Up - TechForum</title>
     <!-- Connect your external CSS file -->
     <link rel="icon" href="assets/images/im.png" type="image/png">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- Load base styles first, then responsive overrides -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <style>
         body {
             background: url("assets/images/dsi.jpg") center/cover fixed no-repeat;

@@ -6,13 +6,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (registerBtn) {
         registerBtn.addEventListener('click', function () {
-            container.classList.add('active');
+            if (container) {
+                container.classList.add('active');
+            } else {
+                console.warn('Auth container not found: cannot activate register view');
+            }
         });
     }
 
     if (loginBtn) {
         loginBtn.addEventListener('click', function () {
-            container.classList.remove('active');
+            if (container) {
+                container.classList.remove('active');
+            } else {
+                console.warn('Auth container not found: cannot activate login view');
+            }
         });
     }
 
@@ -255,6 +263,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 300);
         }
     };
+
+    // Ensure the Forgot Password link always works, even without inline handlers
+    const forgotLinkEl = document.querySelector('.forgot-password-link');
+    if (forgotLinkEl) {
+        forgotLinkEl.addEventListener('click', function (e) {
+            // Delegate to the exported handler
+            if (typeof window.showForgotPassword === 'function') {
+                window.showForgotPassword(e);
+            }
+        });
+    }
 
     // Auto-hide messages after 5 seconds
     const messages = document.querySelectorAll('.msg, .flash-message');
