@@ -17,20 +17,28 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Forgot password functionality with smooth transitions
-    window.showForgotPassword = function () {
+    // Accept an optional event to avoid relying on the implicit global `event`
+    window.showForgotPassword = function (e) {
         const container = document.getElementById('container');
 
-        // Add loading effect
-        const forgotLink = event.target;
-        const originalText = forgotLink.innerHTML;
-        forgotLink.innerHTML = '⏳ Loading...';
-        forgotLink.style.pointerEvents = 'none';
+        // Prevent default for anchor clicks
+        if (e && typeof e.preventDefault === 'function') e.preventDefault();
+
+        // Add loading effect (be defensive in case no event/element)
+        const forgotLink = (e && (e.currentTarget || e.target)) || document.querySelector('.forgot-password-link');
+        const originalText = forgotLink ? forgotLink.innerHTML : null;
+        if (forgotLink) {
+            forgotLink.innerHTML = '⏳ Loading...';
+            forgotLink.style.pointerEvents = 'none';
+        }
 
         // Smooth transition
         setTimeout(() => {
             container.classList.add("forgot");
-            forgotLink.innerHTML = originalText;
-            forgotLink.style.pointerEvents = 'auto';
+            if (forgotLink) {
+                forgotLink.innerHTML = originalText;
+                forgotLink.style.pointerEvents = 'auto';
+            }
 
             // Add subtle animation to the forgot password form
             const forgotForm = document.getElementById('forgotPassword');
@@ -123,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 " onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e1e5e9'">
                 
                 <div style="display: flex; gap: 10px; justify-content: center;">
-                    <button onclick="verifyAdminToken()" style="
+                    <button onclick="verifyAdminToken(event)" style="
                         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                         color: white;
                         padding: 12px 24px;
@@ -200,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Verify admin token function
-    window.verifyAdminToken = function () {
+    window.verifyAdminToken = function (e) {
         const token = document.getElementById('adminToken').value;
         const errorDiv = document.getElementById('tokenError');
 
@@ -211,10 +219,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Show loading
-        const submitBtn = event.target;
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Verifying...';
-        submitBtn.disabled = true;
+        const submitBtn = (e && (e.currentTarget || e.target)) || document.querySelector('#adminTokenOverlay button');
+        const originalText = submitBtn ? submitBtn.textContent : null;
+        if (submitBtn) {
+            submitBtn.textContent = 'Verifying...';
+            submitBtn.disabled = true;
+        }
 
         // Create a form and submit the token to admin_access.php
         const form = document.createElement('form');

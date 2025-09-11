@@ -216,7 +216,7 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
                     <span>or use your account</span>
                     <input type="email" name="email" placeholder="Email" required maxlength="120">
                     <input type="password" name="password" placeholder="Password" required>
-                    <a href="#" onclick="showForgotPassword()" style="
+                    <a href="#" onclick="showForgotPassword(event)" style="
                     color: #667eea; 
                     font-size: 13px; 
                     text-decoration: none; 
