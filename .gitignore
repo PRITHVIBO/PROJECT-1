@@ -29,5 +29,15 @@ debug_*.php
 # Node (if later added)
 node_modules/
 
+# Mermaid diagram files
+*.mmd
+*.mermaid
+mermaid-*.png
+mermaid-*.svg
+mermaid-*.pdf
+**/mermaid-diagrams/
+mermaid-cache/
+.mermaid/
+
 # Misc/temporary
 archive_unused/
